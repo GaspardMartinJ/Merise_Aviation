@@ -1,0 +1,6 @@
+@test_merise_HostAddress = http://localhost:5228
+
+GET {{test_merise_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
