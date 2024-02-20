@@ -2,6 +2,6 @@
 {
     public class Pilote : Equipage
     {
-        public bool est_commandant { get; set; }
+        public bool Est_commandant { get; set; }
     }
 }

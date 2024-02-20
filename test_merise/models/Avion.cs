@@ -2,11 +2,10 @@
 {
     public class Avion
     {
-        public int Num_avion { get; set; }
-
+        public int Id { get; set; }
         public string Compagnie { get; set; }
         public string Modele { get; set; }
         public int Capacite { get; set; }
-        public List<Vol> Vols { get;}
+        public List<Vol> Vols { get; set; }
     }
 }

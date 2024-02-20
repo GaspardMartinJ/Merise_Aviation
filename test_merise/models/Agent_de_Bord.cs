@@ -1,7 +1,7 @@
 ﻿namespace test_merise.models
 {
-    public class Agent_de_Bord
+    public class Agent_de_Bord : Equipage
     {
-        public bool est_chef_cabine { get; set; }
+        public bool Est_chef_cabine { get; set; }
     }
 }

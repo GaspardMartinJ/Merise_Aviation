@@ -2,11 +2,11 @@
 {
     public class Passager
     {
-        public int num_passag { get; set; }
-        public string nom { get; set; }
-        public string prenom { get; set; }
-        public int num_place { get; set; }
-        //public List<Passager> voisins { get;}
-        public List<(Vol, DateTime)> resevation { get;}
+        public int Id { get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+        public int Num_place { get; set; }
+        //public List<Passager> voisins { get; set; }
+        public List<Reservation> Reservations { get; set; }
     }
 }

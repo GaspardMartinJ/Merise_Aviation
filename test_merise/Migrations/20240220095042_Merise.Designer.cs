@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using test_merise.data;
 
@@ -11,9 +12,11 @@ using test_merise.data;
 namespace test_merise.Migrations
 {
     [DbContext(typeof(VoyageDbContext))]
-    partial class VoyageDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240220095042_Merise")]
+    partial class Merise
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,7 +138,12 @@ namespace test_merise.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("VolId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VolId");
 
                     b.ToTable("Passagers");
                 });
@@ -155,24 +163,6 @@ namespace test_merise.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Personnes");
-                });
-
-            modelBuilder.Entity("test_merise.models.Reservation", b =>
-                {
-                    b.Property<int>("PassagerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VolId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateReservation")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("PassagerId", "VolId");
-
-                    b.HasIndex("VolId");
-
-                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("test_merise.models.Vol", b =>
@@ -253,19 +243,11 @@ namespace test_merise.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("test_merise.models.Reservation", b =>
+            modelBuilder.Entity("test_merise.models.Passager", b =>
                 {
-                    b.HasOne("test_merise.models.Passager", null)
-                        .WithMany("Reservations")
-                        .HasForeignKey("PassagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("test_merise.models.Vol", null)
-                        .WithMany("Reservations")
-                        .HasForeignKey("VolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Passagers")
+                        .HasForeignKey("VolId");
                 });
 
             modelBuilder.Entity("test_merise.models.Vol", b =>
@@ -297,14 +279,9 @@ namespace test_merise.Migrations
                     b.Navigation("Vols");
                 });
 
-            modelBuilder.Entity("test_merise.models.Passager", b =>
-                {
-                    b.Navigation("Reservations");
-                });
-
             modelBuilder.Entity("test_merise.models.Vol", b =>
                 {
-                    b.Navigation("Reservations");
+                    b.Navigation("Passagers");
                 });
 #pragma warning restore 612, 618
         }
